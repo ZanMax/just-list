@@ -1,11 +1,19 @@
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework import viewsets
+from main.models import Category, Item
+from .serializers import CategorySerializer, ItemSerializer
 
 
-@api_view(['GET'])
-def api1(request):
-    return Response({'message': 'Hello, world!'})
+class CategoryViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
-@api_view(['GET'])
-def api2(request):
-    return Response({'message': 'Hello, world2!'})
+
+class ItemViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
